@@ -10,8 +10,8 @@
 
 <body>
     @yield('content')
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="//js.stripe.com/v3/"></script>
+    <script src="//cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('js/checkout.js') }}" defer></script>
 </body>
 

@@ -5,11 +5,11 @@ const frontendUrl = "http://127.0.0.1:8001";
 let stripe = null;
 
 const domain = "good";
-const token = "Bearer 1|vygVRhoKkODdUfd71nf9HhO0QGfAMgAjME7MykRt83b30a90";
+const token = "Bearer 1|cIOkhuOVvIBkXOUIYhRdnQVq2Mtwel4Nu2dHYIUC268b8fdb";
 const data = {
-    shop_order_id: 1,
-    payment_gateway_id: 1,
+    website_payment_id: "9bfc8491-e381-46aa-be01-cc0f0b2c6f38",
 };
+let successUrl = null;
 
 let elements;
 
@@ -49,8 +49,9 @@ async function initialize() {
             }
         );
         // console.log(response.data);
-        const publicKey = response.data.public_key;
-        const clientSecret = response.data.client_secret;
+        const publicKey = response.data.data.public_key;
+        const clientSecret = response.data.data.client_secret;
+        successUrl = response.data.data.success_url;
         stripe = Stripe(publicKey);
         elements = stripe.elements({ clientSecret });
 
@@ -81,7 +82,7 @@ async function handleSubmit(e) {
         elements,
         confirmParams: {
             // Make sure to change this to your payment completion page
-            return_url: `${frontendUrl}/checkout/completed`,
+            return_url: successUrl,
         },
     });
 
